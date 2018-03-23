@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Vue</title>
+    <link rel="stylesheet" href="css/bootstrap.css">
+</head>
+<body>
+<div id="app">
+    <p>{{ message }}</p>
+    <p>{{ arr }}</p>
+    <p>{{ json }}</p>
+    <input type="text" v-model="message"> <!--双向数据绑定-->
+    <ul>
+        <li v-for="(v,i) in arr">{{v}} {{i}} </li>
+    </ul>
+    <ul>
+        <li v-for="(v,i) in json">
+            {{v}}-{{i}}
+            <ol>
+                <li v-for="(value,key,index) in v">{{value}}-{{key}}-{{index}}</li>
+            </ol>
+        </li>
+    </ul>
+    <input type="button" value="按钮" v-on:click="add()">
+    <input type="button" value="按钮show">
+    <div style="width: 100px;height: 100px;background: red;" v-show="trueAfalse"></div>
+
+
+</div>
+
+
+<script src="js/jquery-3.2.1.min.js"></script>
+<script src="js/bootstrap.js"></script>
+<script src="js/vue.min.js"></script>
+<script>
+    window.onload=function(){
+        new Vue({
+            el: '#app', /*选择器 class tagname*/
+            data: {
+                message: 'Hello Vue.js!',
+                arr: ['apple','banana','orange'],
+                json: [
+                        {a:'apple',b:"banana",c:'orange'},
+                        {a:'apple',b:"banana",c:'orange'}
+                      ],
+                trueAfalse:true
+            },
+            methods:{
+                add:function(){  //方法
+                    this.arr.push('tomato')
+                }
+            }
+        })
+    }
+
+</script>
+</body>
+</html>
