@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>过滤模板数据</title>
+</head>
+<body>
+<div id="app">
+    <p>系统提供一些过滤器</p>
+    <!--大小写转换-->
+    {{'welcome'|uppercase}}
+    <hr>
+    {{'WELCOME'|lowercase}}
+    <hr>
+    <!--首字母大写-->
+    {{'welcome'|capitalize}}
+    <hr>
+    {{'WELCOME'|lowercase |capitalize}}
+    <hr>
+    <!--转换成美元-->
+    {{12|currency}}
+    <hr>
+    <!--转换成人民币-->
+    {{12|currency '￥'}}
+
+</div>
+<script src="../js/vue.min.js"></script>
+<script>
+    window.onload=function(){
+        new Vue({
+            el: '#app',
+            data: {
+
+            },
+            methods:{
+
+            }
+        })
+    }
+
+</script>
+</body>
+</html>

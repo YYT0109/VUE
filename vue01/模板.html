@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Vue</title>
+</head>
+<style>
+    .red{color: red;}
+</style>
+<body>
+<div id="app">
+    <input type="text" v-model="msg">
+    <br>
+    {{msg}}
+    <br>
+    {{msg}}<!--{{{}}  {{*}}-->
+    <br>
+
+</div>
+<script src="../js/vue.min.js"></script>
+<script>
+    window.onload=function(){
+        new Vue({
+            el: '#app',
+            data: {
+                msg:"aaa"
+            },
+            methods:{
+
+            }
+        })
+    }
+
+</script>
+</body>
+</html>

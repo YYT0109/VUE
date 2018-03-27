@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>交互</title>
+</head>
+<body>
+<div id="app">
+    <p>$http (ajax)</p>
+    <p>引入resource</p>
+    <p>get json post</p>
+
+    <input type="button" value="GET按钮" @click="get()">
+    <input type="button" value="POST按钮" @click="post()">
+    <input type="button" value="jsonp按钮" @click="jsonp()">
+</div>
+<script src="../js/vue.min.js"></script>
+<script src="../js/vue-resourse.min.js"></script>
+<script>
+    window.onload=function(){
+        new Vue({
+            el: '#app',
+            data: {
+
+            },
+            methods:{
+                get:function(){
+                    this.$http.get('a.txt').then(function(res){
+                        alert(res.data)
+                    },function(res){
+                        alert(res.status);
+                    });
+                },
+                post:function(){
+                    this.$http.post('post.php',{
+                        a:1,
+                        b:2
+                    },{
+                        emulateJSON:true
+                    }).then(function(res){
+                        alert(res.data)
+                    },function(res){
+                        alert(res.status);
+                    });
+                },
+                /*jsonp:function(){
+                    this.$http.jsonp('https://sug.so.360.cn/suggest',{
+                        word:"a"
+                    }).then(function(res){
+                        alert(res.data.s)
+                    },function(res){
+                        alert(res.status);
+                    });
+                },*/
+                jsonp:function(){
+                    this.$http.jsonp('https://sp0.baidu.com/5a1Fazu8AA54nxGko9WTAnF6hhy/su',{
+                        wd:"a"
+                    },{
+                        jsonp:'cb'
+                    }).then(function(res){
+                        alert(res.data.s)
+                    },function(res){
+                        alert(res.status);
+                    });
+                }
+            }
+        })
+    }
+
+</script>
+</body>
+</html>
