@@ -4,38 +4,51 @@
     <meta charset="utf-8">
     <title>交互</title>
 </head>
+<style>
+    .gray{background: #ccc;}
+</style>
 <body>
 <div id="app">
 
-    <input type="text" value="" v-model="t1" @keyup="jsonp()">
+    <input type="text" value="" v-model="t1" @keyup="jsonp()" @keydown.down="changedown()" @keydown.up.prevent="changeup()">
     <ul>
-        <li v-for="value in myData"></li>
+        <li v-for="value in myData" :class="{gray:$index==now }">{{value}}</li>
     </ul>
-    <p>暂无数据</p>
-
+    <p v-show="myData.length==0">暂无数据</p>
 
 </div>
+
 <script src="../js/vue.js"></script>
 <script src="../js/vue-resourse.min.js"></script>
+<script src="../js/jquery-3.2.1.min.js"></script>
 <script>
     window.onload=function(){
+
         new Vue({
             el: '#app',
             data: {
                 myData:[],
-                t1:""
+                t1:"",
+                now:-1
             },
             methods:{
                 jsonp:function(){
-                    this.$http.jsonp('https://gsp0.baidu.com/5a1Fazu8AA54nxGko9WTAnF6hhy/su',{
-                        wd: this.t1
-                    },{
+                    this.$http.jsonp('https://sp0.baidu.com/5a1Fazu8AA54nxGko9WTAnF6hhy/su?wd=a',{
                         jsonp:'cb'
                     }).then(function(res){
+                       //  alert(res.data.s)
                         this.myData=res.data.s;
                     },function(res){
                         alert(res.status);
-                    });
+                    })
+                },
+                changedown:function(){
+                    this.now++;
+                    if(this.now==this.myDate.length) this.now=-1;
+                },
+                changeup:function(){
+                    this.now--;
+                    if(this.now==-2) this.now=this.myDate.length-1;
                 }
             }
         })
